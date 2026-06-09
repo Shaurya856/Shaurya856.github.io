@@ -140,7 +140,7 @@
   /* EXPERIENCE */
   #experience { background: var(--bg2); max-width: 100%; padding-left: 60px; padding-right: 60px; }
   #experience > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
-  .exp-cards { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 2px; }
+  .exp-cards { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
   .exp-card { background: var(--surface); border: 1px solid var(--border); padding: 48px; display: grid; grid-template-columns: 200px 1fr; gap: 48px; position: relative; transition: border-color 0.3s; }
   .exp-card:hover { border-color: var(--accent); }
   .exp-card .exp-badge { position: absolute; top: 24px; right: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; opacity: 0.7; }
@@ -154,7 +154,7 @@
   .tag { font-family: var(--mono); font-size: 11px; padding: 5px 12px; background: rgba(79, 255, 176, 0.06); border: 1px solid rgba(79, 255, 176, 0.2); color: var(--accent); letter-spacing: 0.06em; }
 
   /* PROJECTS */
-  .projects-grid { display: flex; flex-direction: column; gap: 2px; }
+  .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
   .project-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -354,7 +354,7 @@
       <div class="project-left">
         <div class="project-num">01 / COMPUTER VISION</div>
         <h3 class="project-name">OceanLens</h3>
-        <p class="project-desc">Marine species detection and seabed image enhancement pipeline built on a custom-curated dataset of 13,711 underwater images across 23 species, covering diverse depth ranges and visibility conditions. Dual-model architecture supports both high-accuracy server deployment and CPU-only edge environments.</p>
+        <p class="project-desc">End-to-end underwater CV system — 7-technique seabed image enhancement pipeline and a dual-architecture species detector (SeabedDetector for cloud/GPU, SeabedLite for CPU/edge). FastAPI backend with WebSocket progress events for async jobs.</p>
         <div class="exp-tags">
           <span class="tag">PyTorch</span>
           <span class="tag">FastAPI</span>
@@ -365,12 +365,12 @@
       <a href="https://github.com/Shaurya856/Image_API" target="_blank" class="project-link">⌥ GitHub</a>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>13,711 images across 23 marine species</li>
-          <li>83M parameter full model</li>
-          <li>2.1M lightweight variant — 80–120ms CPU inference</li>
-          <li>7-technique seabed image enhancement pipeline</li>
-          <li>8 REST + 1 WebSocket endpoints via FastAPI</li>
-          <li>Per-frame detection with novel species flagging</li>
+          <li>13,711-image dataset across 23 marine species covering diverse depth ranges and visibility conditions</li>
+          <li>SeabedDetector — ConvNeXt-S + Swin-T backbone, BiFPN neck, DETR decoder, hierarchical taxonomy classifier, novelty detection</li>
+          <li>SeabedLite — lightweight variant for CPU/edge deployment, 80–120ms inference with no GPU required</li>
+          <li>7-technique enhancement pipeline — CLAHE, denoising, dehazing, gamma correction, Retinex, super-resolution, white balance</li>
+          <li>Video ingestion with per-frame detection; WebSocket events for real-time job progress</li>
+          <li>8 REST + 1 WebSocket endpoints; patent filing in progress — implementation details withheld</li>
         </ul>
       </div>
     </div>
@@ -379,22 +379,22 @@
       <div class="project-left">
         <div class="project-num">02 / LLM ENGINEERING</div>
         <h3 class="project-name">Self-Correcting LLM Framework</h3>
-        <p class="project-desc">Novel architecture for hallucination reduction with weighted conversation memory. Offline deployment via Ollama + Phi-3 Mini with vector-based self-correction loops.</p>
+        <p class="project-desc">Research harness studying whether an LLM can catch and fix its own mistakes during multi-turn RAG conversations, and whether those corrections can be turned into a fine-tuning dataset. Novel method — patent filing in progress, implementation details withheld.</p>
         <div class="exp-tags">
-          <span class="tag">ChromaDB</span>
-          <span class="tag">Ollama</span>
-          <span class="tag">Phi-3</span>
           <span class="tag">Python</span>
+          <span class="tag">ChromaDB</span>
+          <span class="tag">LoRA</span>
+          <span class="tag">Streamlit</span>
         </div>
       </div>
       <span class="project-private">⊘ Private Repo</span>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>Weighted conversation memory system</li>
-          <li>Vector-based self-correction loops</li>
-          <li>Hallucination guard mechanisms</li>
-          <li>Fully offline via Ollama + Phi-3 Mini</li>
-          <li>Local file ingestion via Apache Tika</li>
+          <li>8-dimension reflection — 3 heuristic + 5 LLM-as-judge dimensions with live-adjustable weights</li>
+          <li>Steered retrieval — query embedding steered away from prior bad responses each turn</li>
+          <li>EWMA score accumulation driving temperature, prompt budget split, and retrieval steering</li>
+          <li>Automatic TrainingPair collection → LoRA fine-tuning trigger (local PEFT or Together.ai API)</li>
+          <li>Research UI exposes per-dimension scores, accumulator history, and prompt-budget ratios turn-by-turn</li>
         </ul>
       </div>
     </div>
@@ -403,20 +403,22 @@
       <div class="project-left">
         <div class="project-num">03 / NLP</div>
         <h3 class="project-name">Verdikt</h3>
-        <p class="project-desc">Evidence-grounded document verification system using NLI. Decomposes claims, retrieves evidence via API sources, and produces deterministic per-claim verdicts — no black-box scoring.</p>
+        <p class="project-desc">Evidence-grounded document verification system with two modes: Fact Verification (NLI-based claim checking against retrieved evidence) and Guideline Compliance (constraint parsing against a rules document). Multi-provider LLM support with automatic fallback. No black-box scoring — every verdict is traceable to a source chunk.</p>
         <div class="exp-tags">
           <span class="tag">NLI</span>
           <span class="tag">FastAPI</span>
+          <span class="tag">MCP</span>
           <span class="tag">Python</span>
         </div>
       </div>
       <a href="https://github.com/Shaurya856/Verdikt" target="_blank" class="project-link">⌥ GitHub</a>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>NLI-based claim verification pipeline</li>
-          <li>API-based evidence retrieval (no vector search)</li>
-          <li>Per-claim verdicts: correct, incorrect, or uncertain</li>
-          <li>Compliance mode for document-against-document checks</li>
+          <li>NLI-based claim decomposition and verification pipeline</li>
+          <li>API-based evidence retrieval — Wikipedia, arXiv, custom documents, web search via MCP</li>
+          <li>Per-claim verdicts: correct, incorrect, or uncertain with accuracy and risk scores</li>
+          <li>Compliance mode — parses REQUIREMENT/PROHIBITION constraints and checks document adherence</li>
+          <li>Multi-provider LLM client with automatic fallback on rate-limit or failure</li>
         </ul>
       </div>
     </div>
@@ -425,21 +427,21 @@
       <div class="project-left">
         <div class="project-num">04 / FULL-STACK</div>
         <h3 class="project-name">FlowForge</h3>
-        <p class="project-desc">API workflow execution platform that chains multi-step HTTP requests with variable extraction, response chaining, retry logic, and concurrent workers. Includes a load simulation engine and statistical anomaly detection.</p>
+        <p class="project-desc">Self-hosted API workflow execution and load testing platform. Define multi-step workflows, run them at configurable concurrency, stream traces live via SSE, and detect performance anomalies — all from an interactive UI.</p>
         <div class="exp-tags">
           <span class="tag">FastAPI</span>
           <span class="tag">SQLite</span>
-          <span class="tag">pytest</span>
           <span class="tag">Python</span>
         </div>
       </div>
       <a href="https://github.com/Shaurya856/API_Testing_Workflow" target="_blank" class="project-link">⌥ GitHub</a>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>Multi-step HTTP chaining with variable extraction</li>
+          <li>Multi-step HTTP chaining with variable extraction, response chaining, and retry logic</li>
           <li>Async concurrent load simulation engine</li>
+          <li>Live SSE execution traces per workflow run</li>
+          <li>Z-score + IQR statistical anomaly detection</li>
           <li>Mock server for isolated workflow testing</li>
-          <li>Z-score & IQR statistical anomaly detection</li>
           <li>33-test pytest suite across 7 test classes</li>
         </ul>
       </div>
@@ -449,23 +451,23 @@
       <div class="project-left">
         <div class="project-num">05 / BACKEND</div>
         <h3 class="project-name">RAG API</h3>
-        <p class="project-desc">FastAPI and ChromaDB-powered RAG API enabling context-aware querying across multi-format documents. Hierarchical chunking pipeline from paragraph to sentence level with MiniLM-L6-v2 semantic embeddings, supporting high-recall retrieval across large document corpora.</p>
+        <p class="project-desc">FastAPI service for multi-format document ingestion and hybrid retrieval. Combines dense vector search and BM25 keyword matching via Reciprocal Rank Fusion, with a hierarchical chunking pipeline and persistent BM25 index.</p>
         <div class="exp-tags">
           <span class="tag">FastAPI</span>
           <span class="tag">ChromaDB</span>
+          <span class="tag">BM25</span>
           <span class="tag">Docker</span>
-          <span class="tag">MiniLM</span>
           <span class="tag">Python</span>
         </div>
       </div>
       <a href="https://github.com/Shaurya856/retrieval-augmented-generation" target="_blank" class="project-link">⌥ GitHub</a>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>Multi-format ingestion — PDF, PPTX, DOCX, CSV</li>
-          <li>Hierarchical chunking (paragraph → sentence)</li>
-          <li>MiniLM-L6-v2 semantic embeddings</li>
-          <li>High-recall retrieval across large corpora</li>
-          <li>Docker containerized for portable deployment</li>
+          <li>Multi-format ingestion — PDF, DOCX, PPTX, CSV, TXT, and anything else via Apache Tika fallback</li>
+          <li>Hierarchical chunking — heading → paragraph → sentence with sliding-window fallback; token budget enforced via model tokenizer</li>
+          <li>Hybrid retrieval — BM25 + vector search merged via Reciprocal Rank Fusion</li>
+          <li>BM25 index persisted via shelve; loads on startup, falls back to full rebuild if stale</li>
+          <li>Per-document delete; Dockerized with volume-mount for persistence</li>
         </ul>
       </div>
     </div>
@@ -474,7 +476,7 @@
       <div class="project-left">
         <div class="project-num">06 / COMPUTER VISION</div>
         <h3 class="project-name">EdgeProctor</h3>
-        <p class="project-desc">Offline edge AI proctoring system built for Raspberry Pi 4. Establishes per-subject behavioural baselines and flags anomalies using EWMA scoring and temporal pattern detection, with a SHA-256 tamper-evident audit chain.</p>
+        <p class="project-desc">Offline edge AI proctoring system for Raspberry Pi 4 and standard webcams. No cloud, no internet — everything runs on-device. Closed-loop pipeline where suspicion score modulates detection sensitivity and CPU usage simultaneously.</p>
         <div class="exp-tags">
           <span class="tag">Python</span>
           <span class="tag">OpenCV</span>
@@ -485,10 +487,12 @@
       <span class="project-private">⊘ Private Repo</span>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>Per-subject behavioural baseline calibration</li>
-          <li>EWMA anomaly scoring with temporal pattern detection</li>
-          <li>SHA-256 tamper-evident audit chain</li>
-          <li>Runs fully offline on Raspberry Pi 4</li>
+          <li>Per-subject behavioural baseline calibration — detection thresholds adapt to each individual, not fixed values</li>
+          <li>Continuous gradient suspicion scoring — risk signal rather than binary alerts</li>
+          <li>Temporal cheating-pattern detection — recognises behavioural signatures across a session window</li>
+          <li>SHA-256 tamper-evident audit chain — any post-session modification breaks the chain</li>
+          <li>Runs fully offline on Raspberry Pi 4; no cloud or internet required</li>
+          <li>Patent filing in progress — implementation details withheld</li>
         </ul>
       </div>
     </div>
@@ -497,7 +501,7 @@
       <div class="project-left">
         <div class="project-num">07 / QUANTITATIVE FINANCE</div>
         <h3 class="project-name">Nifty_SLM</h3>
-        <p class="project-desc">Fine-tuned Phi-2 (2.7B) on NIFTY 50 options data using LoRA and PEFT for structured signal generation. Evaluation via walk-forward backtesting with W&B experiment tracking.</p>
+        <p class="project-desc">Fine-tuned Phi-2 (2.7B) on NIFTY 50 options data using LoRA and PEFT for structured CE/PE/NEUTRAL signal generation. Rule-based orchestrator, RAG retrieval over 100 historical regime episodes, walk-forward backtesting, and W&B experiment tracking.</p>
         <div class="exp-tags">
           <span class="tag">PyTorch</span>
           <span class="tag">LoRA</span>
@@ -508,10 +512,11 @@
       <a href="https://github.com/Shaurya856/Nifty_SLM" target="_blank" class="project-link">⌥ GitHub</a>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>Phi-2 (2.7B) fine-tuned via LoRA + PEFT</li>
-          <li>Structured options signal generation</li>
-          <li>RAG pipeline for live market context</li>
-          <li>Walk-forward evaluation with W&B tracking</li>
+          <li>Phi-2 (2.7B) fine-tuned via LoRA + PEFT on 300 instruction samples</li>
+          <li>Structured CE/PE/NEUTRAL options signal generation from 30-minute market state snapshots</li>
+          <li>RAG pipeline over 100 historical regime episodes for live market context</li>
+          <li>Rule-based signal orchestrator with 4-filter logic</li>
+          <li>Walk-forward evaluation with W&B experiment tracking</li>
         </ul>
       </div>
     </div>
