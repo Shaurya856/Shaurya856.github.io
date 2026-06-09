@@ -259,7 +259,7 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-tag">Pre-final year · VIT Vellore · CSE AI & ML</div>
+  <div class="hero-tag">Final year · VIT Vellore · CSE AI & ML</div>
   <h1 class="hero-name">Shaurya<br/><em>Maloo</em></h1>
   <p class="hero-sub">AI & ML Engineer building intelligent systems — from hallucination-resistant LLM frameworks to marine species detectors.</p>
   <div class="hero-ctas">
@@ -280,12 +280,11 @@
   <h2 class="section-title">Building at the<br/><em>edge of AI</em></h2>
   <div class="about-grid">
     <div class="about-text reveal">
-      <p>I'm a pre-final year <strong>CSE (AI & ML)</strong> student at VIT Vellore with a <strong>9.02 CGPA</strong>, focused on building production-grade AI systems that solve hard, real-world problems.</p>
+      <p>I'm a final year <strong>CSE (AI & ML)</strong> student at VIT Vellore, focused on building production-grade AI systems that solve hard, real-world problems.</p>
       <p>My work spans LLM engineering, computer vision, RAG pipelines, and MLOps — with a bias towards systems that are reliable, explainable, and deployable.</p>
     </div>
-    <div class="about-stats reveal reveal-delay-1">
-      <div class="stat-card"><div class="stat-num">9.02</div><div class="stat-label">CGPA</div></div>
-      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Projects</div></div>
+    <div class="about-stats reveal reveal-delay-1" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="stat-card"><div class="stat-num">7+</div><div class="stat-label">Projects</div></div>
       <div class="stat-card"><div class="stat-num">50%</div><div class="stat-label">Faster DevOps RCA</div></div>
     </div>
   </div>
@@ -308,7 +307,7 @@
       <div class="exp-body">
         <span class="exp-badge">INTERNSHIP</span>
         <div class="exp-role">AI & Data Intern</div>
-        <p class="exp-desc">Built an MCP server integrated into a full observability stack (Prometheus + Kubernetes + Grafana Loki + OpenTelemetry). Developed LLM-powered root cause analysis tools with hallucination guards, reducing DevOps investigation time by 50%. Achieved 100% accurate PromQL output via LLM-powered RCA tools using async call chaining and hierarchical summarization.</p>
+        <p class="exp-desc">Built an MCP server integrated into a full observability stack (Prometheus + Kubernetes + Grafana Loki + OpenTelemetry). Developed LLM-powered root cause analysis tools with hallucination guards, reducing DevOps investigation time by 50%. Engineered LLM-powered PromQL generation tools for anomaly detection and telemetry parsing; async call chaining and hierarchical summarization reducing inference overhead and latency.</p>
         <div class="exp-tags">
           <span class="tag">MCP Server</span>
           <span class="tag">LLM</span>
@@ -403,22 +402,20 @@
     <div class="project-card reveal">
       <div class="project-left">
         <div class="project-num">03 / NLP</div>
-        <h3 class="project-name">AI-Powered Fact Checker</h3>
-        <p class="project-desc">LLM-powered fact checker that decomposes input text into individual claims via NLI, then independently verifies each against user-selected sources — Wikipedia, arXiv, custom documents, or live web search via MCP. Includes a compliance mode for validating one document against another's rules.</p>
+        <h3 class="project-name">Verdikt</h3>
+        <p class="project-desc">Evidence-grounded document verification system using NLI. Decomposes claims, retrieves evidence via API sources, and produces deterministic per-claim verdicts — no black-box scoring.</p>
         <div class="exp-tags">
           <span class="tag">NLI</span>
-          <span class="tag">MCP</span>
           <span class="tag">FastAPI</span>
           <span class="tag">Python</span>
         </div>
       </div>
-      <a href="https://github.com/Shaurya856/fact_checker" target="_blank" class="project-link">⌥ GitHub</a>
+      <a href="https://github.com/Shaurya856/Verdikt" target="_blank" class="project-link">⌥ GitHub</a>
       <div class="project-right">
         <ul class="project-highlights">
-          <li>NLI claim decomposition engine</li>
-          <li>Wikipedia, arXiv, MCP web search sources</li>
-          <li>Per-claim verdicts with accuracy & risk scores</li>
-          <li>Deterministic verification with strict aggregation</li>
+          <li>NLI-based claim verification pipeline</li>
+          <li>API-based evidence retrieval (no vector search)</li>
+          <li>Per-claim verdicts: correct, incorrect, or uncertain</li>
           <li>Compliance mode for document-against-document checks</li>
         </ul>
       </div>
@@ -473,6 +470,51 @@
       </div>
     </div>
 
+    <div class="project-card reveal">
+      <div class="project-left">
+        <div class="project-num">06 / COMPUTER VISION</div>
+        <h3 class="project-name">EdgeProctor</h3>
+        <p class="project-desc">Offline edge AI proctoring system built for Raspberry Pi 4. Establishes per-subject behavioural baselines and flags anomalies using EWMA scoring and temporal pattern detection, with a SHA-256 tamper-evident audit chain.</p>
+        <div class="exp-tags">
+          <span class="tag">Python</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">MediaPipe</span>
+          <span class="tag">Raspberry Pi</span>
+        </div>
+      </div>
+      <span class="project-private">⊘ Private Repo</span>
+      <div class="project-right">
+        <ul class="project-highlights">
+          <li>Per-subject behavioural baseline calibration</li>
+          <li>EWMA anomaly scoring with temporal pattern detection</li>
+          <li>SHA-256 tamper-evident audit chain</li>
+          <li>Runs fully offline on Raspberry Pi 4</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-left">
+        <div class="project-num">07 / QUANTITATIVE FINANCE</div>
+        <h3 class="project-name">Nifty_SLM</h3>
+        <p class="project-desc">Fine-tuned Phi-2 (2.7B) on NIFTY 50 options data using LoRA and PEFT for structured signal generation. Evaluation via walk-forward backtesting with W&B experiment tracking.</p>
+        <div class="exp-tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">LoRA</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <a href="https://github.com/Shaurya856/Nifty_SLM" target="_blank" class="project-link">⌥ GitHub</a>
+      <div class="project-right">
+        <ul class="project-highlights">
+          <li>Phi-2 (2.7B) fine-tuned via LoRA + PEFT</li>
+          <li>Structured options signal generation</li>
+          <li>RAG pipeline for live market context</li>
+          <li>Walk-forward evaluation with W&B tracking</li>
+        </ul>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -547,7 +589,7 @@
   <div class="section-label">05 — Contact</div>
   <h2 class="section-title">Let's build<br/><em>something</em></h2>
   <div class="contact-wrapper">
-    <p class="contact-intro reveal">I'm actively looking for AI/ML or backend-oriented SDE internships for May–June 2026. If you're working on hard problems in AI, I'd love to talk.</p>
+    <p class="contact-intro reveal">I'm actively looking for full-time or internship AI/ML and SDE roles from December 2026. If you're working on hard problems in AI, I'd love to talk.</p>
     <div class="contact-links reveal">
 <a href="mailto:malooshaurya@gmail.com" class="contact-item">
         <span class="contact-type">Email</span>
