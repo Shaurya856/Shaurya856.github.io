@@ -25,6 +25,8 @@
 <title>Shaurya Maloo — AI & ML Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,529 +40,60 @@
   "jobTitle": "AI/ML Engineer"
 }
 </script>
-<style>
-  :root {
-    --bg: #080a0f;
-    --bg2: #0d1018;
-    --surface: #111520;
-    --border: #1e2535;
-    --accent: #4fffb0;
-    --muted: #4a5568;
-    --text: #e2e8f0;
-    --text-dim: #8899aa;
-    --heading-font: 'DM Serif Display', serif;
-    --body-font: 'Syne', sans-serif;
-    --mono: 'DM Mono', monospace;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--body-font);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 60px;
-    background: rgba(8, 10, 15, 0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a { font-family: var(--mono); font-size: 12px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-resume { font-family: var(--mono); font-size: 11px; color: #000; background: var(--accent);border: 1px solid var(--border); padding: 7px 16px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; white-space: nowrap; }
-  .nav-resume:hover { background:#fff; }
-  .nav-menu { position: fixed; top: 0; right: 0; z-index: 100; padding: 20px 60px; }
-  .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 22px; background: none; border: none; cursor: pointer; padding: 0; z-index: 101; }
-  .nav-toggle span { display: block; width: 100%; height: 2px; background: var(--text); transition: transform 0.2s, opacity 0.2s; }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 120px;
-    position: relative;
-    max-width: 100%;
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-  .hero-tag { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
-  .hero-name { font-family: var(--heading-font); font-size: clamp(56px, 8vw, 110px); line-height: 0.95; letter-spacing: -0.02em; color: var(--text); opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
-  .hero-name em { font-style: italic; color: var(--accent); }
-  .hero-sub { margin-top: 28px; font-size: 17px; color: var(--text-dim); max-width: 520px; line-height: 1.8; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
-  .hero-ctas { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
-  .btn-primary { display: inline-block; padding: 14px 32px; background: var(--accent); color: #000; font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
-  .btn-primary:hover { background: #fff; transform: translateY(-2px); }
-  .btn-ghost   { display: inline-block; padding: 14px 32px; border: 1px solid var(--border); color: var(--text-dim); font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);  }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-  .hero-grid-accent { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); width: 300px; height: 300px; background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.06; }
-  .hero-scroll { position: absolute; bottom: 40px; left: 60px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeIn 1s 1.2s forwards; }
-  .hero-scroll::after { content: ''; width: 40px; height: 1px; background: var(--muted); }
-
-  /* SECTION LABELS */
-  .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
-  .section-title { font-family: var(--heading-font); font-size: clamp(36px, 5vw, 58px); line-height: 1.05; color: var(--text); margin-bottom: 60px; }
-  .section-title em { font-style: italic; color: var(--accent); }
-
-  /* ABOUT */
-  #about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-  .about-text p { color: var(--text-dim); font-size: 16px; line-height: 1.9; margin-bottom: 20px; }
-  .about-text p strong { color: var(--text); font-weight: 600; }
-  .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 28px 24px; position: relative; overflow: hidden; transition: border-color 0.3s; }
-  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: height 0.4s; }
-  .stat-card:hover { border-color: var(--accent); }
-  .stat-card:hover::before { height: 100%; }
-  .stat-num { font-family: var(--heading-font); font-size: 42px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
-  .stat-label { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
-
-  /* EXPERIENCE */
-  #experience { background: var(--bg2); max-width: 100%; padding-left: 60px; padding-right: 60px; }
-  #experience > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
-  .exp-cards { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
-  .exp-card { background: var(--surface); border: 1px solid var(--border); padding: 48px; display: grid; grid-template-columns: 200px 1fr; gap: 48px; position: relative; transition: border-color 0.3s; }
-  .exp-card:hover { border-color: var(--accent); }
-  .exp-card .exp-badge { position: absolute; top: 24px; right: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; opacity: 0.7; }
-  .exp-meta { border-right: 1px solid var(--border); padding-right: 48px; }
-  .exp-company { font-family: var(--heading-font); font-size: 26px; color: var(--text); margin-bottom: 8px; }
-  .exp-date { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
-  .exp-loc { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
-  .exp-role { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 20px; letter-spacing: -0.01em; }
-  .exp-desc { color: var(--text-dim); font-size: 15px; line-height: 1.8; margin-bottom: 24px; }
-  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tag { font-family: var(--mono); font-size: 11px; padding: 5px 12px; background: rgba(79, 255, 176, 0.06); border: 1px solid rgba(79, 255, 176, 0.2); color: var(--accent); letter-spacing: 0.06em; }
-
-  /* PROJECTS */
-  .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 40px 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
-    position: relative;
-    transition: border-color 0.3s;
-    cursor: default;
-    overflow: hidden;
-  }
-  .project-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(79, 255, 176, 0.04) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
-  .project-card:hover { border-color: var(--accent); }
-  .project-card:hover::before { opacity: 1; }
-  .project-left { display: flex; flex-direction: column; }
-  .project-right { display: flex; flex-direction: column; justify-content: center; padding-top: 40px; }
-  .project-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 16px; }
-  .project-name { font-family: var(--heading-font); font-size: 28px; color: var(--text); margin-bottom: 12px; line-height: 1.1; }
-  .project-desc { font-size: 14px; color: var(--text-dim); line-height: 1.8; margin-bottom: 24px; flex: 1; }
-  .project-highlights { list-style: none; margin-bottom: 24px; }
-  .project-highlights li { font-family: var(--mono); font-size: 12px; color: var(--text-dim); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-  .project-highlights li::before { content: '→'; color: var(--accent); font-size: 11px; flex-shrink: 0; }
-  .project-link { position: absolute; top: 24px; right: 24px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; border: 1px solid rgba(79,255,176,0.3); padding: 5px 12px; transition: all 0.2s; z-index: 1; }
-  .project-link:hover { background: rgba(79,255,176,0.08); border-color: var(--accent); }
-  .project-private { position: absolute; top: 24px; right: 24px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; border: 1px solid var(--border); padding: 5px 12px; z-index: 1; }
-
-  /* SKILLS */
-  #skills { background: var(--bg2); max-width: 100%; padding-left: 60px; padding-right: 60px; }
-  .skills-inner { max-width: 1100px; margin: 0 auto; }
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .skill-group { background: var(--surface); border: 1px solid var(--border); padding: 32px; }
-  .skill-group-label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .cert-strip { max-width: 1100px; margin: 40px auto 0; background: var(--surface); border: 1px solid var(--border); padding: 24px 32px; display: flex; align-items: center; gap: 24px; }
-  .cert-icon { font-size: 24px; color: var(--accent); font-family: var(--mono); }
-  .cert-name { font-size: 15px; font-weight: 700; color: var(--text); }
-  .cert-issuer { font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
-  .cert-badge { margin-left: auto; font-family: var(--mono); font-size: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 5px 14px; letter-spacing: 0.1em; }
-
-  /* CONTACT */
-  .contact-wrapper { max-width: 680px; }
-  .contact-intro { font-size: 17px; color: var(--text-dim); line-height: 1.8; margin-bottom: 48px; }
-  .contact-links { display: flex; flex-direction: column; gap: 2px; }
-  .contact-item { display: flex; align-items: center; gap: 24px; background: var(--surface); border: 1px solid var(--border); padding: 20px 28px; text-decoration: none; transition: all 0.2s; }
-  .contact-item:hover { border-color: var(--accent); transform: translateX(8px); }
-  .contact-type { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; width: 80px; flex-shrink: 0; }
-  .contact-value { font-size: 15px; color: var(--text); font-weight: 600; }
-  .contact-arrow { margin-left: auto; color: var(--accent); font-size: 18px; opacity: 0; transition: opacity 0.2s, transform 0.2s; }
-  .contact-item:hover .contact-arrow { opacity: 1; transform: translateX(4px); }
-
-  footer { border-top: 1px solid var(--border); padding: 32px 60px; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
-  .footer-copy { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-  .footer-copy span { color: var(--accent); }
-  .footer-back { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
-  .footer-back:hover { color: var(--accent); }
-
-  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 60px; }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-
-  @media (max-width: 840px) {
-    nav { padding: 16px 24px; }
-    .nav-toggle { display: flex; }
-    .nav-menu { top: 0; left: 0; right: 0; bottom: 0; padding: 0; flex-direction: column; align-items: center; justify-content: center; gap: 32px; background: rgba(8, 10, 15, 0.97); backdrop-filter: blur(16px); transform: translateX(100%); transition: transform 0.3s ease; }
-    .nav-menu.open { transform: translateX(0); }
-    .nav-links { flex-direction: column; align-items: center; gap: 28px; }
-    .nav-links a { font-size: 16px; }
-  }
-
-  @media (max-width: 900px) {
-    section { padding: 80px 24px; }
-    #hero, #experience, #skills { padding-left: 24px; padding-right: 24px; }
-    #about .about-grid { grid-template-columns: 1fr; }
-    .about-stats { grid-template-columns: repeat(3, 1fr); }
-    .exp-card { grid-template-columns: 1fr; padding: 28px; }
-    .exp-meta { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 24px; }
-    .project-card { grid-template-columns: 1fr; padding: 28px; gap: 24px; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .hero-grid-accent { display: none; }
-    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
-    .divider { margin: 0 24px; }
-  }
-</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="nav-logo">SM_portfolio.v1</a>
-  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-menu" style="display:flex; align-items:center; gap:32px;">
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="https://drive.google.com/uc?export=download&id=1e3x1G0sgXDX5G89TiM-mS3kgwHeNy3RZ" class="nav-resume">Resume ↓</a>
-</div>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-tag">Final year · VIT Vellore · CSE AI & ML</div>
-  <h1 class="hero-name">Shaurya<br/><em>Maloo</em></h1>
-  <p class="hero-sub">AI & ML Engineer building intelligent systems — from hallucination-resistant LLM frameworks to marine species detectors.</p>
-  <div class="hero-ctas">
-    <a href="#projects" class="btn-primary">View Work</a>
-    <a href="#contact" class="btn-ghost">Get in Touch</a>
-    <a href="https://github.com/Shaurya856" target="_blank" class="btn-primary">GitHub</a>
-    <a href="https://leetcode.com/u/shaurya_maloo/" target="_blank" class="btn-ghost">LeetCode</a>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="#top" id="top" class="sidebar-logo">SM_portfolio.v2</a>
+  <nav class="sidebar-nav">
+    <a href="#about" class="sidebar-link" data-section="about"><i data-lucide="user"></i><span>About</span></a>
+    <a href="#experience" class="sidebar-link" data-section="experience"><i data-lucide="briefcase"></i><span>Experience</span></a>
+    <a href="#projects" class="sidebar-link" data-section="projects"><i data-lucide="terminal"></i><span>Projects</span></a>
+  </nav>
+  <div class="sidebar-spacer"></div>
+  <div class="sidebar-socials">
+    <a href="mailto:malooshaurya@gmail.com" class="sidebar-social"><i data-lucide="mail"></i><span>malooshaurya@gmail.com</span></a>
+    <a href="https://www.linkedin.com/in/shaurya-maloo-41834b230/" target="_blank" class="sidebar-social"><i data-lucide="linkedin"></i><span>LinkedIn</span></a>
+    <a href="https://github.com/Shaurya856" target="_blank" class="sidebar-social"><i data-lucide="github"></i><span>GitHub</span></a>
   </div>
-  <div class="hero-grid-accent"></div>
-  <div class="hero-scroll">scroll</div>
-</section>
+  <a href="https://drive.google.com/uc?export=download&id=1F8wUPABqgsAt5AI3aWcr3OaKztMAto1C" class="sidebar-resume"><i data-lucide="download"></i><span>Resume</span></a>
+</aside>
 
-<div class="divider"></div>
+<!-- FLOATING RESUME PILL -->
+<a href="https://drive.google.com/uc?export=download&id=1F8wUPABqgsAt5AI3aWcr3OaKztMAto1C" class="resume-fab" target="_blank"><i data-lucide="download"></i> Resume</a>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">01 — About</div>
-  <h2 class="section-title">Building at the<br/><em>edge of AI</em></h2>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>I'm a final year <strong>CSE (AI & ML)</strong> student at VIT Vellore, focused on building production-grade AI systems that solve hard, real-world problems.</p>
-      <p>My work spans LLM engineering, computer vision, RAG pipelines, and MLOps — with a bias towards systems that are reliable, explainable, and deployable.</p>
-    </div>
-    <div class="about-stats reveal reveal-delay-1" style="grid-template-columns: repeat(2, 1fr);">
-      <div class="stat-card"><div class="stat-num">7+</div><div class="stat-label">Projects</div></div>
-      <div class="stat-card"><div class="stat-num">50%</div><div class="stat-label">Faster DevOps RCA</div></div>
-    </div>
-  </div>
-</section>
+<main class="main">
 
-<div class="divider"></div>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-label">02 — Experience</div>
-  <h2 class="section-title reveal">Where I've<br/><em>shipped things</em></h2>
-  <div class="exp-cards">
-
-    <div class="exp-card reveal">
-      <div class="exp-meta">
-        <div class="exp-company">Opstree Solutions</div>
-        <div class="exp-date">May — July 2025</div>
-        <div class="exp-loc">India</div>
+  <!-- LANDING STRIP -->
+  <div class="landing-strip">
+    <div class="left-col">
+      <div class="identity">
+        <h1 class="identity-name">Shaurya Maloo</h1>
+        <div class="identity-tag">AI & ML Engineer · Final Year, VIT Vellore · CSE AI & ML</div>
+        <p class="identity-bio"><strong>AI & ML Engineer</strong> building intelligent systems — from hallucination-resistant LLM frameworks to marine species detectors.</p>
       </div>
-      <div class="exp-body">
-        <span class="exp-badge">INTERNSHIP</span>
-        <div class="exp-role">AI & Data Intern</div>
-        <p class="exp-desc">Built an MCP server integrated into a full observability stack (Prometheus + Kubernetes + Grafana Loki + OpenTelemetry). Developed LLM-powered root cause analysis tools with hallucination guards, reducing DevOps investigation time by 50%. Engineered LLM-powered PromQL generation tools for anomaly detection and telemetry parsing; async call chaining and hierarchical summarization reducing inference overhead and latency.</p>
-        <div class="exp-tags">
-          <span class="tag">MCP Server</span>
-          <span class="tag">LLM</span>
-          <span class="tag">Prometheus</span>
-          <span class="tag">Grafana Loki</span>
-          <span class="tag">OpenTelemetry</span>
-          <span class="tag">Kubernetes</span>
-          <span class="tag">RCA</span>
+      <section id="about">
+        <div class="section-label">About</div>
+        <div class="about-text">
+          <p>I'm a final year <strong>CSE (AI & ML)</strong> student at VIT Vellore, focused on building production-grade AI systems that solve hard, real-world problems.</p>
+          <p>My work spans <strong>LLM engineering</strong>, <strong>computer vision</strong>, <strong>RAG pipelines</strong>, and <strong>MLOps</strong> — with a bias towards systems that are reliable, explainable, and deployable.</p>
         </div>
-      </div>
+      </section>
     </div>
-
-    <div class="exp-card reveal">
-      <div class="exp-meta">
-        <div class="exp-company">IEEE-CS VIT</div>
-        <div class="exp-date">January 2024 - December 2025</div>
-        <div class="exp-loc">VIT Vellore</div>
-      </div>
-      <div class="exp-body">
-        <span class="exp-badge">LEADERSHIP</span>
-        <div class="exp-role">Senior Core Member</div>
-        <p class="exp-desc">Mentored junior members on online deployment pipelines for a CTF event, handling flag hosting and infrastructure setup at IEEE-CS VIT Vellore.</p>
-        <div class="exp-tags">
-          <span class="tag">AI/ML</span>
-          <span class="tag">CTF</span>
-          <span class="tag">Deployment</span>
-          <span class="tag">Mentorship</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">03 — Projects</div>
-  <h2 class="section-title">Things I've<br/><em>built</em></h2>
-  <div class="projects-grid">
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">01 / COMPUTER VISION</div>
-        <h3 class="project-name">OceanLens</h3>
-        <p class="project-desc">End-to-end underwater CV system — 7-technique seabed image enhancement pipeline and a dual-architecture species detector (SeabedDetector for cloud/GPU, SeabedLite for CPU/edge). FastAPI backend with WebSocket progress events for async jobs.</p>
-        <div class="exp-tags">
-          <span class="tag">PyTorch</span>
-          <span class="tag">FastAPI</span>
-          <span class="tag">Computer Vision</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-      <a href="https://github.com/Shaurya856/Image_API" target="_blank" class="project-link">⌥ GitHub</a>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>13,711-image dataset across 23 marine species covering diverse depth ranges and visibility conditions</li>
-          <li>SeabedDetector — ConvNeXt-S + Swin-T backbone, BiFPN neck, DETR decoder, hierarchical taxonomy classifier, novelty detection</li>
-          <li>SeabedLite — lightweight variant for CPU/edge deployment, 80–120ms inference with no GPU required</li>
-          <li>7-technique enhancement pipeline — CLAHE, denoising, dehazing, gamma correction, Retinex, super-resolution, white balance</li>
-          <li>Video ingestion with per-frame detection; WebSocket events for real-time job progress</li>
-          <li>8 REST + 1 WebSocket endpoints; patent filing in progress — implementation details withheld</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">02 / LLM ENGINEERING</div>
-        <h3 class="project-name">Self-Correcting LLM Framework</h3>
-        <p class="project-desc">Research harness studying whether an LLM can catch and fix its own mistakes during multi-turn RAG conversations, and whether those corrections can be turned into a fine-tuning dataset. Novel method — patent filing in progress, implementation details withheld.</p>
-        <div class="exp-tags">
-          <span class="tag">Python</span>
-          <span class="tag">ChromaDB</span>
-          <span class="tag">LoRA</span>
-          <span class="tag">Streamlit</span>
-        </div>
-      </div>
-      <span class="project-private">⊘ Private Repo</span>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>8-dimension reflection — 3 heuristic + 5 LLM-as-judge dimensions with live-adjustable weights</li>
-          <li>Steered retrieval — query embedding steered away from prior bad responses each turn</li>
-          <li>EWMA score accumulation driving temperature, prompt budget split, and retrieval steering</li>
-          <li>Automatic TrainingPair collection → LoRA fine-tuning trigger (local PEFT or Together.ai API)</li>
-          <li>Research UI exposes per-dimension scores, accumulator history, and prompt-budget ratios turn-by-turn</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">03 / NLP</div>
-        <h3 class="project-name">Verdikt</h3>
-        <p class="project-desc">Evidence-grounded document verification system with two modes: Fact Verification (NLI-based claim checking against retrieved evidence) and Guideline Compliance (constraint parsing against a rules document). Multi-provider LLM support with automatic fallback. No black-box scoring — every verdict is traceable to a source chunk.</p>
-        <div class="exp-tags">
-          <span class="tag">NLI</span>
-          <span class="tag">FastAPI</span>
-          <span class="tag">MCP</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-      <a href="https://github.com/Shaurya856/Verdikt" target="_blank" class="project-link">⌥ GitHub</a>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>NLI-based claim decomposition and verification pipeline</li>
-          <li>API-based evidence retrieval — Wikipedia, arXiv, custom documents, web search via MCP</li>
-          <li>Per-claim verdicts: correct, incorrect, or uncertain with accuracy and risk scores</li>
-          <li>Compliance mode — parses REQUIREMENT/PROHIBITION constraints and checks document adherence</li>
-          <li>Multi-provider LLM client with automatic fallback on rate-limit or failure</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">04 / FULL-STACK</div>
-        <h3 class="project-name">FlowForge</h3>
-        <p class="project-desc">Self-hosted API workflow execution and load testing platform. Define multi-step workflows, run them at configurable concurrency, stream traces live via SSE, and detect performance anomalies — all from an interactive UI.</p>
-        <div class="exp-tags">
-          <span class="tag">FastAPI</span>
-          <span class="tag">SQLite</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-      <a href="https://github.com/Shaurya856/API_Testing_Workflow" target="_blank" class="project-link">⌥ GitHub</a>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>Multi-step HTTP chaining with variable extraction, response chaining, and retry logic</li>
-          <li>Async concurrent load simulation engine</li>
-          <li>Live SSE execution traces per workflow run</li>
-          <li>Z-score + IQR statistical anomaly detection</li>
-          <li>Mock server for isolated workflow testing</li>
-          <li>33-test pytest suite across 7 test classes</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">05 / BACKEND</div>
-        <h3 class="project-name">RAG API</h3>
-        <p class="project-desc">FastAPI service for multi-format document ingestion and hybrid retrieval. Combines dense vector search and BM25 keyword matching via Reciprocal Rank Fusion, with a hierarchical chunking pipeline and persistent BM25 index.</p>
-        <div class="exp-tags">
-          <span class="tag">FastAPI</span>
-          <span class="tag">ChromaDB</span>
-          <span class="tag">BM25</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-      <a href="https://github.com/Shaurya856/retrieval-augmented-generation" target="_blank" class="project-link">⌥ GitHub</a>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>Multi-format ingestion — PDF, DOCX, PPTX, CSV, TXT, and anything else via Apache Tika fallback</li>
-          <li>Hierarchical chunking — heading → paragraph → sentence with sliding-window fallback; token budget enforced via model tokenizer</li>
-          <li>Hybrid retrieval — BM25 + vector search merged via Reciprocal Rank Fusion</li>
-          <li>BM25 index persisted via shelve; loads on startup, falls back to full rebuild if stale</li>
-          <li>Per-document delete; Dockerized with volume-mount for persistence</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">06 / COMPUTER VISION</div>
-        <h3 class="project-name">EdgeProctor</h3>
-        <p class="project-desc">Offline edge AI proctoring system for Raspberry Pi 4 and standard webcams. No cloud, no internet — everything runs on-device. Closed-loop pipeline where suspicion score modulates detection sensitivity and CPU usage simultaneously.</p>
-        <div class="exp-tags">
-          <span class="tag">Python</span>
-          <span class="tag">OpenCV</span>
-          <span class="tag">MediaPipe</span>
-          <span class="tag">Raspberry Pi</span>
-        </div>
-      </div>
-      <span class="project-private">⊘ Private Repo</span>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>Per-subject behavioural baseline calibration — detection thresholds adapt to each individual, not fixed values</li>
-          <li>Continuous gradient suspicion scoring — risk signal rather than binary alerts</li>
-          <li>Temporal cheating-pattern detection — recognises behavioural signatures across a session window</li>
-          <li>SHA-256 tamper-evident audit chain — any post-session modification breaks the chain</li>
-          <li>Runs fully offline on Raspberry Pi 4; no cloud or internet required</li>
-          <li>Patent filing in progress — implementation details withheld</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-left">
-        <div class="project-num">07 / QUANTITATIVE FINANCE</div>
-        <h3 class="project-name">Nifty_SLM</h3>
-        <p class="project-desc">Fine-tuned Phi-2 (2.7B) on NIFTY 50 options data using LoRA and PEFT for structured CE/PE/NEUTRAL signal generation. Rule-based orchestrator, RAG retrieval over 100 historical regime episodes, walk-forward backtesting, and W&B experiment tracking.</p>
-        <div class="exp-tags">
-          <span class="tag">PyTorch</span>
-          <span class="tag">LoRA</span>
-          <span class="tag">RAG</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-      <a href="https://github.com/Shaurya856/Nifty_SLM" target="_blank" class="project-link">⌥ GitHub</a>
-      <div class="project-right">
-        <ul class="project-highlights">
-          <li>Phi-2 (2.7B) fine-tuned via LoRA + PEFT on 300 instruction samples</li>
-          <li>Structured CE/PE/NEUTRAL options signal generation from 30-minute market state snapshots</li>
-          <li>RAG pipeline over 100 historical regime episodes for live market context</li>
-          <li>Rule-based signal orchestrator with 4-filter logic</li>
-          <li>Walk-forward evaluation with W&B experiment tracking</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="skills-inner">
-    <div class="section-label">04 — Skills</div>
-    <h2 class="section-title reveal">What I<br/><em>work with</em></h2>
-    <div class="skills-grid">
-      <div class="skill-group reveal">
-        <div class="skill-group-label">Core Languages</div>
-        <div class="skill-tags">
+    <div class="skills-panel">
+      <div class="sp-group">
+        <div class="sp-label">Languages</div>
+        <div class="sp-tags">
           <span class="tag">Python</span>
           <span class="tag">Java</span>
           <span class="tag">SQL</span>
           <span class="tag">C++</span>
-          <span class="tag">C</span>
         </div>
       </div>
-      <div class="skill-group reveal reveal-delay-1">
-        <div class="skill-group-label">AI / ML Stack</div>
-        <div class="skill-tags">
+      <div class="sp-group">
+        <div class="sp-label">AI / ML Stack</div>
+        <div class="sp-tags">
           <span class="tag">PyTorch</span>
           <span class="tag">TensorFlow</span>
           <span class="tag">LLMs</span>
@@ -570,15 +103,15 @@
           <span class="tag">OpenCV</span>
           <span class="tag">scikit-learn</span>
           <span class="tag">Computer Vision</span>
-          <span class="tag">Reinforcement Learning</span>
           <span class="tag">MediaPipe</span>
           <span class="tag">Pandas</span>
           <span class="tag">NumPy</span>
+          <span class="tag">Reinforcement Learning</span>
         </div>
       </div>
-      <div class="skill-group reveal reveal-delay-2">
-        <div class="skill-group-label">Infrastructure & Tools</div>
-        <div class="skill-tags">
+      <div class="sp-group">
+        <div class="sp-label">Infra & Tools</div>
+        <div class="sp-tags">
           <span class="tag">FastAPI</span>
           <span class="tag">Docker</span>
           <span class="tag">MCP</span>
@@ -591,71 +124,399 @@
           <span class="tag">Postman</span>
         </div>
       </div>
+      <div class="sp-cert">✓ Oracle Cloud Infrastructure Generative AI Professional</div>
     </div>
-    <div class="cert-strip reveal">
-      <div class="cert-icon">◈</div>
-      <div>
-        <div class="cert-name">Oracle Cloud Infrastructure Generative AI Professional</div>
-        <div class="cert-issuer">Oracle · Verified Certification</div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Professional Experience</div>
+    <div class="exp-cards">
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-company">Auriga IT Consulting</div>
+          <div class="exp-date">Jun 2026 – Present</div>
+          <div class="exp-loc">Jaipur, Hybrid</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">AI/ML Intern</div>
+          <ul class="exp-bullets">
+            <li><strong>Call analysis pipeline</strong> — audio chunking, noise removal, and speaker diarization, with per-chunk language detection and language-based model routing into a turn-based conversation flow; includes an SLM fine-tuned via distillation for instruction-following and structured output</li>
+            <li class="extra"><strong>Multi-node LangGraph research agent</strong> with parallel researcher spawning via Send API and FastAPI SSE streaming</li>
+            <li class="extra"><strong>Voice and text customer support agent</strong> — LangGraph StateGraph with a swappable voice layer, SqliteSaver checkpointing, and per-user long-term memory</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">LangGraph</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Python</span>
+            <span class="tag">SSE</span>
+            <span class="tag">STT</span>
+            <span class="tag">IndicConformer</span>
+            <span class="tag">Whisper</span>
+          </div>
+        </div>
       </div>
-      <div class="cert-badge">Certified</div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-company">Opstree Solutions</div>
+          <div class="exp-date">May — July 2025</div>
+          <div class="exp-loc">Noida</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">AI & Data Intern</div>
+          <ul class="exp-bullets">
+            <li><strong>MCP server</strong> integrated into a full observability stack (Prometheus + Kubernetes + Grafana Loki + OpenTelemetry)</li>
+            <li><strong>LLM-powered root cause analysis</strong> with hallucination guards, reducing DevOps investigation time by 50%</li>
+            <li class="extra"><strong>LLM-powered PromQL generation</strong> for anomaly detection and telemetry parsing; async call chaining and hierarchical summarization reducing inference overhead and latency</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">MCP Server</span>
+            <span class="tag">LLM</span>
+            <span class="tag">Prometheus</span>
+            <span class="tag">Grafana Loki</span>
+            <span class="tag">OpenTelemetry</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">RCA</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">05 — Contact</div>
-  <h2 class="section-title">Let's build<br/><em>something</em></h2>
-  <div class="contact-wrapper">
-    <p class="contact-intro reveal">I'm actively looking for full-time or internship AI/ML and SDE roles from December 2026. If you're working on hard problems in AI, I'd love to talk.</p>
-    <div class="contact-links reveal">
-<a href="mailto:malooshaurya@gmail.com" class="contact-item">
-        <span class="contact-type">Email</span>
-        <span class="contact-value">malooshaurya@gmail.com</span>
-        <span class="contact-arrow">→</span>
-      </a>
-      <a href="https://www.linkedin.com/in/shaurya-maloo-41834b230/" target="_blank" class="contact-item">
-        <span class="contact-type">LinkedIn</span>
-        <span class="contact-value">linkedin.com/in/shaurya-maloo-41834b230</span>
-        <span class="contact-arrow">→</span>
-      </a>
 
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <div class="mobile-hint">Tap a card to expand</div>
+    <div class="projects-grid">
+
+      <!-- Row 1: OceanLens (wide) + Self-Correcting LLM -->
+      <div class="project-row">
+        <div class="project-card wide">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">OceanLens</h3>
+              <a href="https://github.com/Shaurya856/Image_API" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc">End-to-end underwater CV system — 7-technique seabed enhancement pipeline and a dual-architecture species detector.</p>
+            <ul class="project-summary">
+              <li><strong>13,711-image dataset</strong> across 23 species — dual backbone: full model + 2.1M-param edge variant</li>
+              <li><strong>7-technique enhancement pipeline</strong>: CLAHE, denoising, dehazing, Retinex, super-resolution</li>
+              <li><strong>FastAPI backend</strong> with WebSocket real-time job progress</li>
+              <li><strong>SeabedLite</strong> — 2.1M-param edge variant, 80–120ms inference with no GPU required</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>13,711-image dataset</strong> across 23 marine species covering diverse depth ranges and visibility conditions</li>
+              <li><strong>SeabedDetector</strong> — ConvNeXt-S + Swin-T backbone, BiFPN neck, DETR decoder, hierarchical taxonomy classifier with novelty detection via confidence gating and prototype distance</li>
+              <li><strong>SeabedLite</strong> — lightweight variant for CPU/edge deployment, 80–120ms inference with no GPU required</li>
+              <li><strong>Automatic model selection</strong> at server startup based on available weights, with graceful fallback between full and lite variants</li>
+              <li><strong>7-technique enhancement pipeline</strong> — CLAHE, denoising, dehazing, gamma correction, Retinex, super-resolution, white balance</li>
+              <li><strong>Video ingestion</strong> with per-frame detection; WebSocket events for real-time job progress; 8 REST + 1 WebSocket endpoints</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Computer Vision</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">Self-Correcting LLM</h3>
+              <span class="project-private">⊘ Private</span>
+            </div>
+            <p class="project-desc">Research harness studying whether an LLM can catch and fix its own mistakes during conversations.</p>
+            <ul class="project-summary">
+              <li><strong>Novel method</strong> — LLM catches and corrects its own mistakes during conversations</li>
+              <li><strong>8-dimension reflection</strong> with live-adjustable weights; steered retrieval away from prior bad responses</li>
+              <li><strong>Automatic fine-tuning dataset collection</strong> → LoRA trigger; patent filing in progress</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>8-dimension reflection</strong> — 3 heuristic + 5 LLM-as-judge dimensions with live-adjustable weights</li>
+              <li><strong>Steered retrieval</strong> — query embedding steered away from prior bad responses each turn</li>
+              <li><strong>EWMA score accumulation</strong> driving temperature, prompt budget split, and retrieval steering</li>
+              <li><strong>Automatic TrainingPair collection</strong> → LoRA fine-tuning trigger (local PEFT or Together.ai API)</li>
+              <li><strong>Research UI</strong> exposes per-dimension scores, accumulator history, and prompt-budget ratios turn-by-turn</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">ChromaDB</span>
+              <span class="tag">LoRA</span>
+              <span class="tag">Streamlit</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+      </div>
+
+      <!-- Row 2: FlowForge + RAG API + Nifty_SLM (all standard) -->
+      <div class="project-row">
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">FlowForge</h3>
+              <a href="https://github.com/Shaurya856/API_Testing_Workflow" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc">Self-hosted API workflow execution and load testing platform with live traces and anomaly detection.</p>
+            <ul class="project-summary">
+              <li><strong>Multi-step HTTP workflow chaining</strong> with variable extraction, retry logic, and live SSE traces</li>
+              <li><strong>Z-score + IQR statistical anomaly detection</strong> across concurrent load simulation runs</li>
+              <li><strong>49-test pytest suite</strong> across 7 test classes; mock server for isolated testing</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Multi-step HTTP chaining</strong> with variable extraction, response chaining, and retry logic</li>
+              <li><strong>Async concurrent load simulation engine</strong></li>
+              <li><strong>Live SSE execution traces</strong> per workflow run</li>
+              <li><strong>Z-score + IQR statistical anomaly detection</strong></li>
+              <li><strong>Mock server</strong> for isolated workflow testing</li>
+              <li><strong>49-test pytest suite</strong> across 7 test classes</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">FastAPI</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">RAG API</h3>
+              <a href="https://github.com/Shaurya856/retrieval-augmented-generation" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc">FastAPI service for multi-format document ingestion and hybrid dense + BM25 retrieval via Reciprocal Rank Fusion.</p>
+            <ul class="project-summary">
+              <li><strong>Hybrid BM25 + vector search</strong> merged via Reciprocal Rank Fusion — beats either method alone</li>
+              <li><strong>Hierarchical chunking</strong>: heading → paragraph → sentence with token budget enforcement</li>
+              <li><strong>Multi-format ingestion</strong> (PDF, DOCX, PPTX, CSV, TXT) with Apache Tika fallback; Dockerized</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Multi-format ingestion</strong> — PDF, DOCX, PPTX, CSV, TXT, and anything else via Apache Tika fallback</li>
+              <li><strong>Hierarchical chunking</strong> — heading → paragraph → sentence with sliding-window fallback; token budget enforced via model tokenizer</li>
+              <li><strong>Hybrid retrieval</strong> — BM25 + vector search merged via Reciprocal Rank Fusion</li>
+              <li><strong>BM25 index persistence</strong> via shelve; loads on startup, falls back to full rebuild if stale</li>
+              <li><strong>Per-document delete</strong>; Dockerized with volume-mount for persistence</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">FastAPI</span>
+              <span class="tag">ChromaDB</span>
+              <span class="tag">BM25</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">Nifty_SLM</h3>
+              <a href="https://github.com/Shaurya856/Nifty_SLM" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc">Fine-tuned Phi-2 (2.7B) on NIFTY 50 options data for structured CE/PE/NEUTRAL signal generation.</p>
+            <ul class="project-summary">
+              <li><strong>Phi-2 (2.7B) fine-tuned</strong> via LoRA + PEFT for structured CE/PE/NEUTRAL options signal generation</li>
+              <li><strong>RAG pipeline</strong> over 100 historical regime episodes for live market context</li>
+              <li><strong>Walk-forward backtesting</strong> with W&B experiment tracking and Platt scaling</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Phi-2 (2.7B) fine-tuned</strong> via LoRA + PEFT on 300 instruction samples</li>
+              <li><strong>Structured CE/PE/NEUTRAL signal generation</strong> from 30-minute market state snapshots</li>
+              <li><strong>RAG pipeline</strong> over 100 historical regime episodes for live market context</li>
+              <li><strong>Rule-based signal orchestrator</strong> with 4-filter logic</li>
+              <li><strong>Walk-forward evaluation</strong> with W&B experiment tracking</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">LoRA</span>
+              <span class="tag">RAG</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+      </div>
+
+      <!-- Row 3: Verdikt (wide) + EdgeProctor -->
+      
+      <div class="project-row">
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">EdgeProctor</h3>
+              <span class="project-private">⊘ Private</span>
+            </div>
+            <p class="project-desc">Offline edge AI proctoring for Raspberry Pi 4 and standard webcams — no cloud, no internet, everything on-device.</p>
+            <ul class="project-summary">
+              <li><strong>Fully offline</strong> on Raspberry Pi 4 — no cloud, no internet, everything on-device</li>
+              <li><strong>Per-subject behavioural baseline calibration</strong> — thresholds adapt to each individual</li>
+              <li><strong>SHA-256 tamper-evident audit chain</strong>; patent filing in progress</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Per-subject behavioural baseline calibration</strong> — detection thresholds adapt to each individual, not fixed values</li>
+              <li><strong>Continuous gradient suspicion scoring</strong> — risk signal rather than binary alerts</li>
+              <li><strong>Temporal cheating-pattern detection</strong> — recognises behavioural signatures across a session window</li>
+              <li><strong>SHA-256 tamper-evident audit chain</strong> — any post-session modification breaks the chain</li>
+              <li><strong>Runs fully offline</strong> on Raspberry Pi 4; no cloud or internet required</li>
+              <li><strong>Patent filing in progress</strong> — implementation details withheld</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">MediaPipe</span>
+              <span class="tag">Raspberry Pi</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+        <div class="project-card wide">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">Verdikt</h3>
+              <a href="https://github.com/Shaurya856/Verdikt" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc">Evidence-grounded document verification — Fact Verification and Guideline Compliance modes, every verdict traceable to a source chunk.</p>
+            <ul class="project-summary">
+              <li><strong>NLI-based claim decomposition</strong> and verification — every verdict traceable to a source chunk</li>
+              <li><strong>Evidence retrieval</strong> from Wikipedia, arXiv, and web search; multi-provider LLM with automatic fallback</li>
+              <li><strong>Compliance mode</strong>: parses REQUIREMENT/PROHIBITION constraints against a rules document</li>
+              <li><strong>Per-claim verdicts</strong>: correct, incorrect, or uncertain with accuracy and risk scores</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>NLI-based claim decomposition</strong> and verification pipeline</li>
+              <li><strong>API-based evidence retrieval</strong> — Wikipedia, arXiv, custom documents, web search via MCP</li>
+              <li><strong>Per-claim verdicts</strong>: correct, incorrect, or uncertain with accuracy and risk scores</li>
+              <li><strong>Compliance mode</strong> — parses REQUIREMENT/PROHIBITION constraints and checks document adherence</li>
+              <li><strong>Multi-provider LLM client</strong> with automatic fallback on rate-limit or failure</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">NLI</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">MCP</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+      </div>
+
+      <!-- Row 4: DesktopMind + Multi-LLM Deep Research Agent + Customer Support Agent -->
+      <div class="project-row">
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">DesktopMind</h3>
+              <a href="https://github.com/Shaurya856/tech-help" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc"><strong>Local-first agentic file assistant</strong> for Windows converting files to compressed PDFs across desktop, email, and MCP surfaces.</p>
+            <ul class="project-summary">
+              <li><strong>Unified C++ conversion core</strong> callable from desktop UI, email, or MCP tools for Claude Cowork</li>
+              <li><strong>Print-by-email confirmation flow</strong> — MIME threading, de-duplication, 24hr expiry sweep</li>
+              <li><strong>Daily folder indexer</strong> via Hermes Agent writing searchable Markdown with wikilinks</li>
+              <li><strong>MCP server</strong> exposes process_file, summarize_file, search_file_index, set_page_order tools for Claude Desktop</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Unified C++ conversion core</strong> (libharu + QPDF) callable from desktop UI, email watcher, or MCP server</li>
+              <li><strong>Print-by-email confirmation flow</strong> — IMAP/SMTP via libcurl + SQLite, MIME threading, de-duplication, 24hr expiry sweep</li>
+              <li><strong>Native Win32 desktop app</strong> — single-file drop or multi-file select with drag-to-reorder before combining</li>
+              <li><strong>MCP server</strong> exposes process_file, summarize_file, search_file_index, set_page_order tools for Claude Cowork</li>
+              <li><strong>Daily folder indexer</strong> via Hermes Agent — writes searchable Markdown with wikilinks to Obsidian vault</li>
+              <li><strong>Office COM automation</strong> (win32com) for DOCX/XLSX conversion with 60s hang timeout and fallback guide</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">C++</span>
+              <span class="tag">Python</span>
+              <span class="tag">MCP</span>
+              <span class="tag">Agentic AI</span>
+              <span class="tag">Tool Orchestration</span>
+              <span class="tag">SQLite</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">Multi-LLM Deep Research Agent</h3>
+              <a href="https://github.com/Shaurya856/ResearchAgent" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc"><strong>Autonomous research framework on LangGraph</strong> — a single query fans out into parallel researcher nodes that search, score sources, extract claims, and detect gaps, then converges into a fully cited, streamed report.</p>
+            <ul class="project-summary">
+              <li><strong>Cost-tiered model routing</strong> — small model handles every repetitive step; large model fires exactly once, at final report generation</li>
+              <li><strong>Recursive dynamic spawning</strong> via LangGraph's Send API, with hard caps on depth and total spawn count</li>
+              <li><strong>Custom credibility scoring</strong> and claim deduplication across parallel research branches</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Cost-tiered model routing</strong> — small model handles every repetitive step (search scoring, claim extraction, gap detection); large model fires exactly once, at final report generation</li>
+              <li><strong>Recursive dynamic spawning</strong> via LangGraph's Send API — researchers split into child researchers when a topic proves too broad, with hard caps on depth and total spawn count</li>
+              <li><strong>Custom credibility scoring</strong> — weighted by source authority, citation count, and recency, tuned differently per query type</li>
+              <li><strong>Claim registry</strong> prevents duplicate work across parallel branches via a reserved → completed state machine</li>
+              <li><strong>Dual-mode SSE streaming</strong> — live node-progress events alongside token-by-token report generation, parsed via deterministic regex</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">LangGraph</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Python</span>
+              <span class="tag">SSE</span>
+              <span class="tag">Multi-Agent</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-hover-zone">
+            <div class="project-top-row">
+              <h3 class="project-name">Customer Support Agent</h3>
+              <a href="https://github.com/Shaurya856/Customer_Support_Agent" target="_blank" class="project-link">⌥ GitHub</a>
+            </div>
+            <p class="project-desc"><strong>Conversational customer support agent on LangGraph</strong> — handles order queries, raises tickets, and escalates to a human agent, with per-user long-term memory and exact-checkpoint session resume.</p>
+            <ul class="project-summary">
+              <li><strong>Two-layer architecture</strong> — text-only core LangGraph StateGraph, with a swappable voice layer (STT + TTS) sitting on top</li>
+              <li><strong>Six tools</strong> split into read-only lookups and write actions, with a code-level confirmation guardrail before any ticket creation or escalation</li>
+              <li><strong>Per-user long-term memory</strong> persisted across sessions, with mid-session resume from the exact checkpoint</li>
+              <li><strong>Sentence-streamed TTS output</strong> for natural-feeling voice responses</li>
+            </ul>
+            <ul class="project-highlights">
+              <li><strong>Text layer runs fully independently of voice</strong> — usable via plain text I/O, piped into an API, or pointed at any frontend, with the voice layer as an optional add-on</li>
+              <li><strong>STT and TTS are each swapped by replacing a single function</strong> — no vendor logic baked into the core agent</li>
+              <li><strong>Confirmation guardrail enforced at the code level</strong> inside the tools node — write actions are structurally blocked until the user gives an explicit affirmative, not just prompted for one</li>
+              <li><strong>Long-term memory updated in place on session resume</strong> — each entry carries issue summary, resolution status, and behavioural notes for future sessions</li>
+              <li><strong>Six tools split cleanly</strong> into read-only lookups (called freely) and write actions (ticket creation, escalation, memory edits) that all require confirmation</li>
+              <li><strong>Ten-minute inactivity timeout</strong> auto-closes and saves the session, so state is never lost on an abandoned conversation</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">LangGraph</span>
+              <span class="tag">LangChain</span>
+              <span class="tag">Python</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">STT</span>
+              <span class="tag">TTS</span>
+            </div>
+          </div>
+          <div class="toggle-hint"><span class="more">show more →</span><span class="less">show less ←</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+</main>
 
 <footer>
   <div class="footer-copy">© 2026 <span>Shaurya Maloo</span> — Designed & built with intent.</div>
-  <a href="#hero" class="footer-back">↑ Back to top</a>
 </footer>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal, .skill-group').forEach(el => observer.observe(el));
-
-  const navToggle = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navMenu.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', isOpen);
-  });
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
+<script src="main.js" defer></script>
 </body>
 </html>
