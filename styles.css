@@ -53,13 +53,13 @@ body::before {
 }
 .sidebar-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; margin-bottom: 44px; display: block; }
 .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
-.sidebar-link { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 13px; color: var(--text); text-decoration: none; letter-spacing: 0.04em; padding: 10px 8px; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.sidebar-link { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 13px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.04em; padding: 10px 8px; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
 .sidebar-link svg { width: 16px; height: 16px; flex-shrink: 0; }
 .sidebar-link:hover { color: var(--text); }
 .sidebar-link.active { color: var(--accent); border-left-color: var(--accent); }
 .sidebar-spacer { flex: 1; }
 .sidebar-socials { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
-.sidebar-social { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11px; color: var(--text); text-decoration: none; padding: 8px; white-space: nowrap; transition: color 0.2s; }
+.sidebar-social { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11px; color: var(--text-dim); text-decoration: none; padding: 8px; white-space: nowrap; transition: color 0.2s; }
 .sidebar-social svg { width: 15px; height: 15px; flex-shrink: 0; }
 .sidebar-social:hover { color: var(--accent); }
 .sidebar-resume {
