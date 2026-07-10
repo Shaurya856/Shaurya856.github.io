@@ -58,7 +58,11 @@ function lockCardHeights() {
       // Add .open → CSS gives this card flex: 2.5 (expanded main-axis width).
       // Force inner content to its "open" visual state via inline styles so the
       // correct amount of text is laid out at the correct expanded width.
+      // align-self:flex-start opts this card out of the row's align-items:stretch —
+      // otherwise offsetHeight reads the ROW height (tallest sibling, whose content
+      // is mid-collapse and still full-size at narrow width), not this card's own.
       card.classList.add('open');
+      card.style.alignSelf = 'flex-start';
       if (summary)    summary.style.cssText = 'max-height:0;opacity:0;margin-bottom:0;transition:none';
       if (highlights) highlights.style.cssText = 'max-height:none;opacity:1;margin-bottom:12px;transition:none';
       if (tags)       tags.style.cssText = 'max-height:200px;opacity:1;transition:none';
@@ -71,6 +75,7 @@ function lockCardHeights() {
 
       // Restore to collapsed state before measuring the next sibling
       card.classList.remove('open');
+      card.style.alignSelf = '';
       if (summary)    summary.style.cssText = '';
       if (highlights) highlights.style.cssText = '';
       if (tags)       tags.style.cssText = '';
