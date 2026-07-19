@@ -22,11 +22,26 @@ document.addEventListener('readystatechange', () => { if (document.readyState ==
 /* === UTILITIES === */
 const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
+/* Collapsing a tall card can remove hundreds of px of height above the
+ * viewport, teleporting the user mid-list. If the card's top ended up above
+ * the viewport after collapsing, restore it into view (78 = topbar + margin). */
+function restoreCardIntoView(card) {
+  requestAnimationFrame(() => {
+    const top = card.getBoundingClientRect().top;
+    if (top < 68) window.scrollTo({ top: card.getBoundingClientRect().top + window.scrollY - 78, behavior: 'auto' });
+  });
+}
+
 
 /* === EXPERIENCE CARDS ===
  * Mobile only: tap to toggle .expanded (CSS :hover handles desktop). */
 document.querySelectorAll('.exp-card').forEach(card => {
-  card.addEventListener('click', () => { if (isMobile()) card.classList.toggle('expanded'); });
+  card.addEventListener('click', () => {
+    if (!isMobile()) return;
+    const wasExpanded = card.classList.contains('expanded');
+    card.classList.toggle('expanded');
+    if (wasExpanded) restoreCardIntoView(card);
+  });
 });
 
 
@@ -37,6 +52,11 @@ document.querySelectorAll('.exp-card').forEach(card => {
  * style.height value can animate and corrupt the reading. */
 function lockCardHeights() {
   const allCards = Array.from(document.querySelectorAll('.project-card'));
+
+  if (isMobile()) {
+    allCards.forEach(c => { c.style.height = ''; c.style.transition = ''; });
+    return;
+  }
 
   // Kill transitions so clearing/setting style.height doesn't animate
   allCards.forEach(c => {
@@ -162,12 +182,20 @@ document.querySelectorAll('.project-card').forEach(card => {
   });
 
   card.addEventListener('click', () => {
-    if (isMobile()) setOpen(!card.classList.contains('open'));
+    if (!isMobile()) return;
+    const wasOpen = card.classList.contains('open');
+    setOpen(!wasOpen);
+    if (wasOpen) restoreCardIntoView(card);
   });
 
   hint.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (isMobile()) { setOpen(!card.classList.contains('open')); return; }
+    if (isMobile()) {
+      const wasOpen = card.classList.contains('open');
+      setOpen(!wasOpen);
+      if (wasOpen) restoreCardIntoView(card);
+      return;
+    }
     const wasPinned = card.classList.contains('pinned');
     document.querySelectorAll('.project-card.pinned').forEach(c => {
       c.classList.remove('pinned', 'open');
@@ -184,7 +212,7 @@ document.querySelectorAll('.project-card').forEach(card => {
  * cursor position. Cursor is irrelevant — exit from viewport triggers collapse. */
 const rowObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (!entry.isIntersecting) {
+    if (!entry.isIntersecting && !isMobile()) {
       entry.target.querySelectorAll('.project-card.open:not(.pinned)').forEach(c => {
         c.classList.remove('open');
       });
@@ -193,3 +221,21 @@ const rowObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0 });
 
 document.querySelectorAll('.project-row').forEach(row => rowObserver.observe(row));
+
+
+/* === PROJECT LINK TAP GUARD ===
+ * Prevents tapping the GitHub pill from also toggling the accordion card. */
+document.querySelectorAll('.project-link').forEach(a =>
+  a.addEventListener('click', e => e.stopPropagation()));
+
+
+/* === MOBILE DRAWER === */
+const menuBtn = document.querySelector('.topbar-menu');
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    const open = document.body.classList.toggle('drawer-open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('.mobile-drawer a').forEach(a =>
+    a.addEventListener('click', () => document.body.classList.remove('drawer-open')));
+}

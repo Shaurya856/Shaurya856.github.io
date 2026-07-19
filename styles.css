@@ -220,6 +220,10 @@ footer { margin-left: var(--sidebar-w); padding: 20px 28px 36px; background: var
 .footer-copy span { color: var(--accent); }
 
 
+/* === MOBILE TOP BAR & DRAWER (desktop default: hidden) === */
+.mobile-topbar, .mobile-drawer { display: none; }
+
+
 /* === FLOATING RESUME PILL === */
 .resume-fab {
   position: fixed; bottom: 24px; right: 24px; z-index: 200;
@@ -235,21 +239,134 @@ footer { margin-left: var(--sidebar-w); padding: 20px 28px 36px; background: var
 
 /* === MOBILE === */
 @media (max-width: 768px) {
-  .sidebar { width: var(--sidebar-w-mobile); padding: 20px 8px; align-items: center; }
-  .sidebar-logo { display: none; }
-  .sidebar-link span, .sidebar-social span { display: none; }
-  .sidebar-link, .sidebar-social { justify-content: center; padding: 10px 0; width: 100%; }
-  .sidebar-resume span { display: none; }
-  .sidebar-resume { padding: 12px; box-shadow: none; }
-  .main { margin-left: var(--sidebar-w-mobile); padding: 0 18px 90px; }
-  footer { margin-left: var(--sidebar-w-mobile); padding: 20px 18px 32px; text-align: center; }
-  .exp-card { grid-template-columns: 1fr; padding: 20px; gap: 14px; }
-  .exp-meta { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding-right: 0; padding-bottom: 14px; }
-  .project-row { flex-direction: column; }
-  .project-row .project-card.open, .project-row:has(.project-card.open) .project-card:not(.open) { flex: 1 1 auto; }
-  .mobile-hint { display: block; }
-  .identity { padding: 32px 0 8px; }
-  .project-card { cursor: pointer; }
-  .resume-fab { padding: 9px 16px; font-size: 10px; bottom: 16px; right: 16px; }
-  .resume-fab svg { width: 12px; height: 12px; }
+  #top, #about, #experience, #projects { scroll-margin-top: 68px; }
+
+  /* === CHROME === */
+  .sidebar, .resume-fab { display: none; }
+  /* single tap-affordance hint under the Projects label (base rule hides it on desktop) */
+  .mobile-hint { display: block; font-size: 10px; margin: -8px 0 14px; }
+  .main, footer { margin-left: 0; padding-left: 18px; padding-right: 18px; }
+  .main { padding-top: 68px; }
+
+  .mobile-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    position: fixed; top: 0; left: 0; right: 0; height: 56px;
+    padding: 0 18px; background: var(--bg2);
+    border-bottom: 1px solid rgba(255,255,255,0.06); z-index: 300;
+  }
+  .topbar-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); text-decoration: none; letter-spacing: 0.1em; }
+  .topbar-menu { background: none; border: none; color: var(--text); padding: 8px; cursor: pointer; }
+  .topbar-menu svg { width: 22px; height: 22px; }
+
+  .mobile-drawer {
+    display: flex; flex-direction: column;
+    position: fixed; top: 56px; left: 0; right: 0; z-index: 299;
+    background: var(--bg2); border-bottom: 1px solid rgba(255,255,255,0.08);
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  body.drawer-open .mobile-drawer { max-height: 420px; }
+  .mobile-drawer a { font-family: var(--mono); font-size: 13px; color: var(--text); text-decoration: none; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .mobile-drawer .drawer-resume { color: var(--accent); font-weight: 500; }
+
+  /* === HERO — single column === */
+  .landing-strip { grid-template-columns: 1fr; gap: 28px; padding: 12px 0 24px; }
+  .identity-name { font-size: 34px; }
+  .skills-panel { display: block; min-width: 0; }
+  .sp-group { margin-bottom: 14px; }
+  .sp-group:nth-child(1), .sp-group:nth-child(2), .sp-group:nth-child(3) { grid-column: auto; grid-row: auto; }
+  .sp-tags {
+    flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    /* full-bleed: escape .main's 18px side padding so pills cut at the
+       physical screen edge like a native chip rail, not mid-screen */
+    margin-left: -18px;
+    margin-right: -18px;
+    padding-left: 18px;
+    padding-right: 18px;
+    /* fade the right edge as a "more content" cue; small left fade is
+       invisible at rest (sits over the 18px padding) but softens the
+       cut once the user has scrolled mid-rail */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 44px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 44px), transparent 100%);
+  }
+  .sp-tags::-webkit-scrollbar { display: none; }
+  .sp-tags .tag { flex-shrink: 0; }
+  .sp-cert { display: flex; font-size: 10px; }
+
+  /* === EXPERIENCE === */
+  .exp-card { grid-template-columns: 1fr; padding: 18px 20px; gap: 10px; }
+  .exp-meta { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 0 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .exp-company { font-size: 19px; margin: 0; }
+  .exp-date { margin: 0; }
+  .exp-loc { width: 100%; }
+  .exp-card:hover .exp-bullets li.extra, .exp-card.expanded .exp-bullets li.extra { max-height: 300px; }
+  .exp-card { cursor: pointer; }
+  .exp-role::after { content: '▾'; float: right; color: var(--accent); transition: transform 0.3s ease; }
+  .exp-card.expanded .exp-role::after { transform: rotate(180deg); }
+
+  /* === PROJECTS — accordion, vertical-only === */
+  .projects-grid { gap: 10px; }
+  /* Rows collapse out of the layout tree so the grid's gap applies uniformly
+     between every card — no row-boundary double spacing. Nodes stay in the DOM
+     for main.js selectors (rowObserver is already gated behind !isMobile()). */
+  .project-row { display: contents; }
+  .project-row .project-card { margin-bottom: 0; }
+  .project-card, .project-card.wide,
+  .project-row .project-card.open,
+  .project-row:has(.project-card.open) .project-card:not(.open) {
+    flex: none; height: auto !important; transition: none; cursor: pointer;
+    padding: 18px 20px;
+  }
+  /* neutralize desktop sibling compaction — accordion never compacts neighbors */
+  .project-row:has(.project-card.open) .project-card:not(.open) .project-summary,
+  .project-row:has(.project-card.open) .project-card:not(.open) .project-tags,
+  .project-row:has(.project-card.open) .project-card:not(.open) .toggle-hint { max-height: 0; opacity: 0; }
+  .project-row:has(.project-card.open) .project-card:not(.open) .project-link,
+  .project-row:has(.project-card.open) .project-card:not(.open) .project-private { opacity: 1; pointer-events: auto; }
+
+  .project-summary { display: none; }
+  .project-top-row {
+    margin-bottom: 0;
+    align-items: center;
+    position: relative;
+    padding-right: 96px; /* reserved space for the pill; keeps it off the title */
+  }
+  .project-top-row::after {
+    content: '▾'; color: var(--accent); font-size: 13px; margin-left: 4px; transition: transform 0.3s ease; flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+  .project-card.open .project-top-row::after { transform: translateY(-50%) rotate(180deg); }
+  .project-name {
+    font-size: 18px;
+    flex: 1;
+    min-width: 0; /* required for flex child to actually shrink/stretch inside row */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+  }
+  .project-link, .project-private {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24px; /* clears the chevron, which sits at right: 0 */
+  }
+
+  .project-desc, .project-highlights, .project-tags, .toggle-hint {
+    max-height: 0; opacity: 0; margin: 0; padding-top: 0; overflow: hidden;
+    transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out, margin 0.35s ease-in-out;
+  }
+  .toggle-hint { border-top: none; }
+  .project-card.open .project-desc { max-height: 240px; opacity: 1; margin: 12px 0 12px; }
+  .project-card.open .project-highlights { max-height: 1200px; opacity: 1; margin-bottom: 12px; transition-duration: 0.45s; }
+  .project-card.open .project-tags { max-height: 200px; opacity: 1; margin-bottom: 4px; }
+  .project-card.open .toggle-hint { max-height: 60px; opacity: 1; padding-top: 10px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .project-card.open .toggle-hint .more { display: none; }
+  .project-card.open .toggle-hint .less { display: inline; }
+
+  footer { text-align: center; padding: 20px 18px 32px; }
 }
